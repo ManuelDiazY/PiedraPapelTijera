@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Juego: Piedra Papel Tijera</title>
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+</head>
+<script type="text/javascript" charset="utf-8">
+		let partida=1;
+		let humano=0;
+		let ordenador=0;
+	function jugar(valor){
+		if(partida<6){
+			document.querySelector('.resPartida').innerHTML = partida;
+			eleccion = valor.toLowerCase();
+			tiradaOrdenador=aleatorio();
+			obteneResultado(eleccion,tiradaOrdenador);
+		}
+		else{
+			if(humano>ordenador){
+				document.querySelector('.ganador').innerHTML = "HUMANO";
+			}else{
+				document.querySelector('.ganador').innerHTML = "ORDENADOR";
+			}
+		}
+		
+	}
+
+	//generar tirada aleatoria del ordenador
+	function aleatorio() {
+		let aleatorio = Math.floor(Math.random() * (4 - 1)) + 1;
+		if(aleatorio==1)
+			return "piedra";
+		if(aleatorio==2)
+			return "papel";
+		if(aleatorio==3)
+			return "tijera";
+	}
+
+	//obtener reultado del juego 
+	function obteneResultado(eleccion,tiradaOrdenador){
+		document.querySelector('.resJuego').innerHTML = "TU: "+ eleccion + " VS " + "ORDENADOR: " + tiradaOrdenador;
+		//eleccion -> mano del jugador
+		if(eleccion===tiradaOrdenador)
+			document.querySelector('.resPartidaJuego').innerHTML = "EMPATE";
+		if(eleccion=="piedra" && tiradaOrdenador=="tijera"){
+			document.querySelector('.resPartidaJuego').innerHTML = "TU GANAS :-)";
+			humano+=1;
+		}
+		if(eleccion=="tijera" && tiradaOrdenador=="papel"){
+			document.querySelector('.resPartidaJuego').innerHTML = "TU GANAS :-)";
+			humano+=1;
+		}
+		//eleccion->mano onrdenador
+		if(tiradaOrdenador=="piedra" && eleccion=="tijera"){
+			document.querySelector('.resPartidaJuego').innerHTML = "ORDENADOR GANA :-(";
+			ordenador+=1;
+		}
+		if(tiradaOrdenador=="tijera" && eleccion=="papel"){
+			document.querySelector('.resPartidaJuego').innerHTML = "ORDENADOR GANA :-(";
+			ordenador+=1;
+		}
+		document.querySelector('.resHumano').innerHTML = humano;
+		document.querySelector('.resOrdenador').innerHTML = ordenador;
+		partida+=1;
+	}
+
+</script>
+<body>
+	<header>
+		<div>
+			<h1>Juego: Piedra, Papel o Tijera</h1>
+		</div>
+	</header>
+
+	<content>
+		<table border="0">
+			<tr>
+				<td id="title-td" colspan="3">(HUMANO) - SELECCIONA TU MANO:</td>
+			</tr>		
+			<tr>
+			    <td>
+			    	<img class="imgHuman" src="./img/rock.png" alt="Piedra" onclick="jugar('piedra');">	
+			    </td>
+			    	
+			    <td>
+			    	<img class="imgHuman" src="./img/paper.png" alt="Papel" onclick="jugar('papel');">
+			    </td>
+
+			    <td>
+			    	<img class="imgHuman" src="./img/scisor.png" alt="Tijera" onclick="jugar('tijera');">
+			    </td>
+
+			    <td>
+			    	<img class="vs" src="./img/vs.png" alt="VS">
+			    </td>
+
+			    <td>
+			    	<img  src="./img/question.png" alt="VS">
+			    </td>
+			 </tr>
+
+			 <tr>
+			    <td>
+			    	Piedra
+			    </td>
+			    <td>
+			    	Papel
+			    </td>
+			    <td>
+			    	Tijera
+			    </td>
+			    <td></td>
+			    <td id="title-td">ORDENADOR:</td>
+			 </tr>
+		</table>
+		<center>
+			<table border="1">
+				<th>PARTIDA</th>
+				<th>SELECCION</th>
+				<th>GANA</th>
+				<tr>
+					<td>
+						<label class="resPartida"></label>
+					</td>
+					<td>
+						<label class="resJuego"></label>
+					</td>
+					<td>
+						<label class="resPartidaJuego"></label>
+					</td>
+				</tr>
+			</table>
+			<br>
+			<table border="1">
+				<th>HUMANO</th>
+				<th></th>
+				<th>ORDENADOR</th>
+				<tr>
+					<td>
+						<label class="resHumano"></label>
+					</td>
+					<td> VS </td>
+				    <td>
+						<label class="resOrdenador"></label>
+				    </td>
+				</tr>
+			</table>
+		<h4>Ganador: </h4>
+			<label class="ganador"></label>
+		</center>	
+	</content>
+
+	<footer>
+		<div class="mexico">
+			<p><a href="index.html">Inicio</a></p>	
+		</div>
+	</footer>
+</body>
+</html>
